@@ -6,16 +6,17 @@ sysclktz 0
 loglevel 3
 
 # setup the global environment
-    export PATH /sbin:/system/sbin:/system/bin:/system/xbin
+
+export PATH /sbin:/system/sbin:/system/bin:/system/xbin
     export LD_LIBRARY_PATH /system/lib
     export ANDROID_BOOTLOGO 1
     export ANDROID_CACHE /cache
     export ANDROID_ROOT /system
     export ANDROID_ASSETS /system/app
     export ANDROID_DATA /data
-    export EXTERNAL_STORAGE /mnt/sdcard
+    export EXTERNAL_STORAGE /sdcard
     export ASEC_MOUNTPOINT /mnt/asec
-    export SD_EXT_DIRECTORY /sd-ext
+#    export SD_EXT_DIRECTORY /sd-ext
     export BOOTCLASSPATH /system/framework/core.jar:/system/framework/ext.jar:/system/framework/framework.jar:/system/framework/android.policy.jar:/system/framework/services.jar
     export TERMINFO /system/etc/terminfo
 
@@ -184,23 +185,22 @@ rc_parallel="YES"					############## MadRcoker ################
 #                 JetDroid Wifi
 ####################################################################################
 
-    mkdir /system/etc/wifi 0770 wifi wifi
-    chmod 0777 /system/etc/wifi
-    chmod 0666 /system/etc/wifi/wpa_supplicant.conf
-    chown wifi wifi /system/etc/wifi/wpa_supplicant.conf
+     #   mkdir /system/etc/wifi 0770 wifi wifi
+   # chmod 0777 /system/etc/wifi
+    #chmod 0666 /system/etc/wifi/wpa_supplicant.conf
+   # chown wifi wifi /system/etc/wifi/wpa_supplicant.conf
 
-    #wpa_supplicant control socket for android wifi.c (android private socket)
-    mkdir /data/misc/wifi 0777 wifi wifi
-    mkdir /data/misc/wifi/sockets 0777 wifi wifi
-    chmod 0777 /data/misc/wifi
-    chmod 0666 /data/misc/wifi/wpa_supplicant.conf
-    chown wifi wifi /data/misc/wifi
-    chown wifi wifi /data/misc/wifi/wpa_supplicant.conf
+#  wpa_supplicant control socket for android wifi.c (android private socket)
+   # mkdir /data/misc/wifi 0777 wifi wifi
+   # mkdir /data/misc/wifi/sockets 0777 wifi wifi
+   # chmod 0777 /data/misc/wifi
+   # chmod 0666 /data/misc/wifi/wpa_supplicant.conf
+   # chown wifi wifi /data/misc/wifi
+   # chown wifi wifi /data/misc/wifi/wpa_supplicant.conf
 
-# give system access to wpa_supplicant.conf for backup and restore
-    mkdir /data/misc/dhcp 0777 wifi wifi
-    chmod 0777 /data/misc/dhcp
-    chown dhcp dhcp /data/misc/dhcp
+    #mkdir /data/misc/dhcp 0777 wifi wifi
+   # chmod 0777 /data/misc/dhcp
+    #chown dhcp dhcp /data/misc/dhcp
 
 #####################################################################################
 
@@ -682,6 +682,7 @@ service dumpstate /system/bin/dumpstate -s
 ####################################################################################
 #                 JetDroid Wifi
 ####################################################################################
+
 
 service wpa_supplicant /system/bin/wpa_supplicant -dd -Dwext -ieth0 -c /data/misc/wifi/wpa_supplicant.conf
     socket wpa_eth0 dgram 666 wifi wifi
